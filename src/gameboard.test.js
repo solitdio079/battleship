@@ -11,24 +11,22 @@ describe('Test gameboard function', () => {
        
     })
 
-    test.skip("should test placeship", ()=>{
-        //jest.mock(getRandomCoordinate)
-        
+    test("testing place specific ship on the board", ()=> {
         const gameboard = createGameboard()
-        const placeLength4 = gameboard.placeShip(4)
-        expect(Array.isArray(gameboard.placeShip())).toBeTruthy()
-      
-        expect((gameboard.placeShip(4).length)).toBe(4)
-        expect(placeLength4[0]).toBeDefined()
-        expect(placeLength4[0]).toBeTruthy()
-        expect(placeLength4[0].length).toBe(2)
-        expect(placeLength4[0][0]).toBeDefined()
-        expect(coordinates[placeLength4[0][0]][placeLength4[0][1]]).toBeTruthy()
-      
-        // placeLength4.forEach(el => {
-          
-        //     expect(coordinates[el[0]][el[1]]).toBeDefined()
-        // })
+        expect(gameboard.placeShipSpecific(2,[0,0],"x")).toEqual([[0,0],[0,1]])
+        expect(gameboard.placeShipSpecific(2,[0,0],"y")).toEqual([[0,0],[1,0]])
+        expect(gameboard.placeShipSpecific(1,[0,0],"y")).toEqual([[0,0]])
+        expect(gameboard.placeShipSpecific(1,[0,0],"x")).toEqual([[0,0]])
+        expect(gameboard.placeShipSpecific(4,[2,3],"x")).toEqual([[2,3],[2,4],[2,5],[2,6]])
+        expect(gameboard.placeShipSpecific(4,[2,7],"x")).toEqual([[2,7],[2,8],[2,9],[2,6]])
+        expect(gameboard.placeShipSpecific(4,[8,4],"y")).toEqual([[8,4],[9,4],[7,4],[6,4]])
+    })
+
+    test("testing receive attack", () => {
+        const gameboard = createGameboard()
+        expect(gameboard.receiveAttack([0,0])).toEqual([0,0])
+        gameboard.placeShipSpecific(1,[0,0],"x")
+        expect(gameboard.receiveAttack([0,0])).toBe(1)
     })
     
 });

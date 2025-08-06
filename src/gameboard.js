@@ -3,6 +3,7 @@ import createShip from "./ship.js"
 function createGameboard(){
    
     const coordinates =  Array.from({ length: 10 }, () => Array.from({ length: 10 }, () => null));
+    const missedCoordinates = []
     //const yCoordinates = [0,1,2,3,4,5,6,7,8,9]
 
     // const [lengthOne,lengthOne2,lengthOne3,lengthOne4] = multipleShips(1,4)
@@ -10,7 +11,46 @@ function createGameboard(){
     // const [lengthThree,lengthThree2] = multipleShips(3,2)
     // const [lengthFour] = multipleShips(4,1)
 
-    function placeShip(shipLength=0){
+    function placeShipSpecific(shipLength=1,startCoordinate,direction="x"){
+        const ship = createShip(shipLength)
+        const allCoordinates = []
+        for(let i = 0; i<shipLength;i++){
+            let nextCoordinate
+            if(direction === "x"){
+                // calculate the next coordinate to be in the 0-9 range
+                nextCoordinate = startCoordinate[1]+i<=9 ?startCoordinate[1]+i :((startCoordinate[1])-((startCoordinate[1]+i)-9))
+
+                allCoordinates.push([startCoordinate[0],(nextCoordinate)])
+
+                coordinates[startCoordinate[0]][nextCoordinate] = ship
+            }else{
+                 // calculate the next coordinate to be in the 0-9 range
+                nextCoordinate = startCoordinate[0]+i<=9 ?startCoordinate[0]+i :((startCoordinate[0])-((startCoordinate[0]+i)-9))
+
+                allCoordinates.push([nextCoordinate,startCoordinate[1]])
+                coordinates[nextCoordinate][startCoordinate[1]] = ship
+            }
+            
+        }
+        return allCoordinates
+    }
+
+    function verifyCoordinate([x,y]){
+        return Boolean(coordinates[x][y])
+    }
+
+    function receiveAttack([x,y]){
+        const isOccupied = verifyCoordinate([x,y])
+        if(!isOccupied){
+            missedCoordinates.push([x,y])
+            return [x,y]
+        } 
+        const ship = coordinates[x][y]
+        ship.hit()
+        return ship.getHitCount()
+    }
+
+    function placeShipRandom(shipLength=0){
         // create the ship
         const ship = createShip(shipLength)
         
@@ -59,7 +99,7 @@ function createGameboard(){
   
    
 
-    return {placeShip, getGameboardCoordinates}
+    return {placeShipRandom, getGameboardCoordinates,placeShipSpecific, receiveAttack}
 }
 
 function getRandomCoordinate(size=1){
