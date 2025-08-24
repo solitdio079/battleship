@@ -1,13 +1,14 @@
-const path = require("path")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+//import path from "path"
+//import  HtmlWebpackPlugin  from "html-webpack-plugin"
+import {merge} from  "webpack-merge"
+import common from "./webpack.common.js"
 
-const { merge } = require('webpack-merge');
- const common = require('./webpack.common.js');
-
- module.exports = merge(common, {
-   mode: 'development',
-   devtool: 'inline-source-map',
-   devServer:  {
-    watchFiles: ["./src/template.html"]
+const merged =  merge(common, {
+  mode: 'development',
+  devtool: 'inline-source-map',
+  devServer:  {
+   watchFiles: ["./src/template.html"]
 }
- });
+});
+
+export default merged

@@ -14,22 +14,23 @@ describe('Test gameboard function', () => {
 
     test("testing place specific ship on the board", ()=> {
         const gameboard = createGameboard()
-        expect(gameboard.placeShipSpecific(createShip(2),[0,0],"x")).toEqual([[0,0],[0,1]])
-        expect(gameboard.placeShipSpecific(createShip(2),[0,0],"y")).toEqual([[0,0],[1,0]])
-        expect(gameboard.placeShipSpecific(createShip(1),[0,0],"y")).toEqual([[0,0]])
-        expect(gameboard.placeShipSpecific(createShip(1),[0,0],"x")).toEqual([[0,0]])
-        expect(gameboard.placeShipSpecific(createShip(4),[2,3],"x")).toEqual([[2,3],[2,4],[2,5],[2,6]])
-        expect(gameboard.placeShipSpecific(createShip(4),[2,7],"x")).toEqual([[2,7],[2,8],[2,9],[2,6]])
-        expect(gameboard.placeShipSpecific(createShip(4),[8,4],"y")).toEqual([[8,4],[9,4],[7,4],[6,4]])
+        expect(gameboard.placeShipSpecific(2,[0,0],"x")).toEqual([[0,0],[0,1]])
+        expect(gameboard.placeShipSpecific(2,[0,0],"y")).toEqual([[0,0],[1,0]])
+        expect(gameboard.placeShipSpecific(1,[0,0],"y")).toEqual([[0,0]])
+        expect(gameboard.placeShipSpecific(1,[0,0],"x")).toEqual([[0,0]])
+        expect(gameboard.placeShipSpecific(4,[2,3],"x")).toEqual([[2,3],[2,4],[2,5],[2,6]])
+        expect(gameboard.placeShipSpecific(4,[2,7],"x")).toEqual([[2,7],[2,8],[2,9],[2,6]])
+        expect(gameboard.placeShipSpecific(4,[8,4],"y")).toEqual([[8,4],[9,4],[7,4],[6,4]])
     })
 
     test("testing receive attack", () => {
         const gameboard = createGameboard()
         expect(gameboard.receiveAttack([0,0])).toEqual([0,0])
-        gameboard.placeShipSpecific(createShip(2),[0,0],"x")
+        gameboard.placeShipSpecific(2,[0,0],"x")
         expect(gameboard.receiveAttack([0,0])).toBe(1)
         expect(gameboard.receiveAttack([0,0])).toBe(1)
         expect(gameboard.receiveAttack([0,1])).toBe(2)
+        expect(gameboard.receiveAttack([8,8])).toEqual([8,8])
     })
 
 
@@ -37,9 +38,9 @@ describe('Test gameboard function', () => {
         const gameboard = createGameboard()
         expect(gameboard.checkIfAllIsSunk([createShip(1)])).toBe(false)
         // place ship on the board
-        gameboard.placeShipSpecific(createShip(1),[0,0],"x")
-        gameboard.placeShipSpecific(createShip(1),[4,4],"y")
-        gameboard.placeShipSpecific(createShip(2),[3,4],"x")
+        gameboard.placeShipSpecific(1,[0,0],"x")
+        gameboard.placeShipSpecific(1,[4,4],"y")
+        gameboard.placeShipSpecific(2,[3,4],"x")
 
         // get the placed ships 
         const ship1 = gameboard.getGameboardCoordinates()[0][0]

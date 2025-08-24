@@ -5,7 +5,7 @@ function createGameboard(){
     const coordinates =  Array.from({ length: 10 }, () => Array.from({ length: 10 }, () => null));
     const missedCoordinates = []
     const hitCoordinates = []
-    const boordShips = [...multipleShips(1,4), ...multipleShips(2,3), ...multipleShips(3,2),...multipleShips(4,1)]
+    const boardShips = []
     //const yCoordinates = [0,1,2,3,4,5,6,7,8,9]
 
     // const [lengthOne,lengthOne2,lengthOne3,lengthOne4] = multipleShips(1,4)
@@ -13,8 +13,9 @@ function createGameboard(){
     // const [lengthThree,lengthThree2] = multipleShips(3,2)
     // const [lengthFour] = multipleShips(4,1)
 
-    function placeShipSpecific(ship,startCoordinate,direction="x"){
-        const shipLength = ship.getLength()
+    function placeShipSpecific(shipLength,startCoordinate,direction="x"){
+        const ship = createShip(shipLength)
+       
         const allCoordinates = []
         for(let i = 0; i<shipLength;i++){
             let nextCoordinate
@@ -34,6 +35,7 @@ function createGameboard(){
             }
             
         }
+        boardShips.push(ship)
         return allCoordinates
     }
 
@@ -54,9 +56,9 @@ function createGameboard(){
         return ship.getHitCount()
     }
 
-    function placeShipRandom(ship){
+    function placeShipRandom(shipLength){
         // create the ship
-        const shipLength = ship.getLength()
+        const ship = createShip(shipLength)
         
         let placeCoordinates = getRandomCoordinate(shipLength)
        
@@ -102,7 +104,7 @@ function createGameboard(){
     }
    
 
-    function checkIfAllIsSunk(shipArray=boordShips){
+    function checkIfAllIsSunk(shipArray=boardShips){
         let check = true
         shipArray.forEach(ship => {
             ship.isSunk()
@@ -111,9 +113,13 @@ function createGameboard(){
         return check
             
     }
+
+    function getMissedCoordinates(){
+        return missedCoordinates
+    }
    
 
-    return {placeShipRandom, getGameboardCoordinates,placeShipSpecific, receiveAttack, checkIfAllIsSunk}
+    return {placeShipRandom, getGameboardCoordinates,placeShipSpecific, receiveAttack, checkIfAllIsSunk, getMissedCoordinates}
 }
 
 function getRandomCoordinate(size=1){
@@ -131,12 +137,12 @@ function getRandomCoordinate(size=1){
 
 
 
-function multipleShips(length, amount=1){
-    const ships = []
-   for(let i = 0; i <amount;i++){
-    ships.push(createShip(length))
-   }
-   return ships
-}
+// function multipleShips(length, amount=1){
+//     const ships = []
+//    for(let i = 0; i <amount;i++){
+//     ships.push(createShip(length))
+//    }
+//    return ships
+// }
 
 export default createGameboard
