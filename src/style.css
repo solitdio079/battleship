@@ -2,3 +2,49 @@
     box-sizing: border-box;
 }
 
+:root{
+    --section-padding: 1rem 3rem;
+    --inner-margin: 1rem 3rem;
+    --gray: #ededed;
+    --input-padding: 1rem;
+    --input-font-size: 1rem;
+    --input-font-color: black;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    padding: var(--section-padding);
+    align-items: center;
+    justify-content: space-between;
+}
+header input {
+     border: none;
+     background-color: var(--gray);
+     padding: var(--input-padding);
+     height: fit-content;
+     font-size: var(--input-font-size);
+     color: var(--input-font-color);
+
+}
+
+.grids-container{
+    display: flex;
+    padding: var(--section-padding);
+    margin: var(--inner-margin);
+    justify-content: center;
+    gap: 6rem;
+    overflow-x: auto;
+}
+.grid{
+ max-width: 400px;
+ min-width: 400px;
+ display: flex;
+ flex-wrap: wrap;
+}
+.square{
+    height: 40px;
+    width: 40px;
+    border: .25px solid black;
+
+}
