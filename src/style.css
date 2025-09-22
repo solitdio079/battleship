@@ -45,6 +45,10 @@ header input {
 .square{
     height: 40px;
     width: 40px;
-    border: .25px solid black;
+    border: .25px solid #ddd;
 
+}
+.square.active{
+    border-color: blueviolet;
+    background-color: rgba(137, 43, 226, 0.3);
 }

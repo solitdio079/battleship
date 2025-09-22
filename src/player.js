@@ -1,4 +1,4 @@
-import createGameboard from "./gameboard";
+import createGameboard from "./gameboard.js";
 
 function createPlayer(type="real"){
     const gameboard = createGameboard()
