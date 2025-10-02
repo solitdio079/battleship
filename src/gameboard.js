@@ -107,8 +107,7 @@ function createGameboard(){
     function checkIfAllIsSunk(shipArray=boardShips){
         let check = true
         shipArray.forEach(ship => {
-            ship.isSunk()
-            if(!ship.getSunk()) check = false
+            if(!ship.isSunk()) check = false
         })
         return check
             
@@ -117,9 +116,13 @@ function createGameboard(){
     function getMissedCoordinates(){
         return missedCoordinates
     }
+
+    function getHitCoordinates(){
+        return hitCoordinates
+    }
    
 
-    return {placeShipRandom, getGameboardCoordinates,placeShipSpecific, receiveAttack, checkIfAllIsSunk, getMissedCoordinates}
+    return {placeShipRandom, getGameboardCoordinates,placeShipSpecific, receiveAttack, checkIfAllIsSunk, getMissedCoordinates, getHitCoordinates}
 }
 
 function getRandomCoordinate(size=1){

@@ -10,6 +10,33 @@
     --input-font-size: 1rem;
     --input-font-color: black;
 }
+body{
+    position: relative;
+}
+
+.gameover{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(128, 128, 128, 0.095);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.gameover p {
+    border: #ddd 1px solid;
+    font-size: 2rem;
+    padding: .5rem;
+}
+.gameover p.win{
+    background-color: green;
+    color: #ddd;
+}
+.gameover p.lose{
+    background-color: red;
+    color: #ddd;
+}
 
 header{
     display: flex;
@@ -28,6 +55,7 @@ header input {
 
 }
 
+
 .grids-container{
     display: flex;
     padding: var(--section-padding);
@@ -41,6 +69,16 @@ header input {
  min-width: 400px;
  display: flex;
  flex-wrap: wrap;
+ position: relative;
+}
+.overlay{
+    position: absolute;
+    max-width: 400px;
+    min-width: 400px;
+    top: 0;
+    height: 100%;
+    background-color: #fdfdfda9;
+
 }
 .square{
     height: 40px;
@@ -51,4 +89,13 @@ header input {
 .square.active{
     border-color: blueviolet;
     background-color: rgba(137, 43, 226, 0.3);
+}
+
+.square.hit{
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.456);
+}
+.square.miss{
+    border-color: gray;
+    background-color: rgba(128, 128, 128, 0.424);
 }
