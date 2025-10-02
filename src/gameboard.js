@@ -52,7 +52,7 @@ function createGameboard(){
         const ship = coordinates[x][y]
         if(JSON.stringify(hitCoordinates).includes(JSON.stringify([x,y]))) return ship.getHitCount()
         ship.hit()
-        console.log(ship.getHitCount())
+        //console.log(ship.getHitCount())
         hitCoordinates.push([x,y])
         return ship.getHitCount()
     }
@@ -68,7 +68,7 @@ function createGameboard(){
         // check if coordinates are good!
         while(true){
             //console.log(coordinatesAreGood === false)
-            console.log(placeCoordinates)
+            //console.log(placeCoordinates)
             let reInitialized = false
             placeCoordinates.forEach(el => {
                 const currentX = el[0]
@@ -77,12 +77,12 @@ function createGameboard(){
                 let nextX1 = (currentX-1)>=0 ?currentX-1 :((currentX+2))
                 let nextY1 = (currentY-1)>=0 ?currentY-1 :((currentY+2))
                 let nextY = (currentY+1)<=9 ?currentY+1 :((currentY)-((currentY+1)-9))
-                console.log("Just for testing ",el[0]+1)
+                //console.log("Just for testing ",el[0]+1)
                 if (coordinates[el[0]][el[1]] !== null || coordinates[nextX][currentY] || coordinates[currentX][nextY] || coordinates[nextX][nextY] || coordinates[currentX][nextY1] || coordinates[nextX1][currentY] || coordinates[nextX1][nextY1]){
                     reInitialized = true
                 }
             })
-            console.log(reInitialized)
+            //console.log(reInitialized)
            
             if(reInitialized){
                 placeCoordinates = getRandomCoordinate(shipLength)
@@ -116,8 +116,6 @@ function createGameboard(){
         shipArray.forEach(ship => {
             if(!ship.isSunk()){
                 check = false
-            }else{
-                console.log(ship.getHitCount())
             }
         })
         return check

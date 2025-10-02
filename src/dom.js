@@ -1,7 +1,7 @@
 
 
 function domActions(){
-    function populateGrid(grid,coordinates=[],hitCoordinates = [], missedCoordinates=[]){
+    function populateGrid(isComputer=true,grid,coordinates=[],hitCoordinates = [], missedCoordinates=[]){
         for(let i = 0; i<10;i++){
             for(let j = 0; j<10;j++){
                 const squareDiv = document.createElement("div")
@@ -16,7 +16,7 @@ function domActions(){
                 
 
                 squareDiv.setAttribute("data-coordinates",`${i},${j}`)
-                if(coordinates[i][j]) {
+                if(coordinates[i][j] && !isComputer) {
                     squareDiv.classList.add("active")
                 }
                 grid.appendChild(squareDiv)
