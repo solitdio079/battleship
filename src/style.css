@@ -99,3 +99,13 @@ header input {
     border-color: gray;
     background-color: rgba(128, 128, 128, 0.424);
 }
+
+.actions{
+    display: flex;
+    justify-content: center;
+}
+
+#placeShipBtn{
+    border: none;
+    margin: 0 auto;
+}

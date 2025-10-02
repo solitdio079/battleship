@@ -4,6 +4,7 @@ import domActions from "./dom.js"
 const grids = document.querySelector(".grids-container")
 const gameoverOverlay = document.querySelector(".gameover")
 const turnHelper = document.querySelector("#turnHelper")
+const placeShipBtn = document.querySelector("#placeShipBtn")
 
 const realPlayer = createPlayer()
 
@@ -14,19 +15,24 @@ let currentPlayer = computerPlayer
 const DOMActions = domActions()
 
 function preDeterminedBoard(player) {
-    player.getPlayerGameboard().placeShipSpecific(4, [1, 1], "y")
-    player.getPlayerGameboard().placeShipSpecific(3, [0, 3], "x")
-    player.getPlayerGameboard().placeShipSpecific(3, [1, 7], "x")
-    player.getPlayerGameboard().placeShipSpecific(2, [5, 7], "y")
-    player.getPlayerGameboard().placeShipSpecific(2, [7, 3], "x")
-    player.getPlayerGameboard().placeShipSpecific(2, [9, 4], "x")
-    player.getPlayerGameboard().placeShipSpecific(1, [9, 0], "x")
-    player.getPlayerGameboard().placeShipSpecific(1, [3, 3], "x")
-    player.getPlayerGameboard().placeShipSpecific(1, [3, 9], "x")
-    player.getPlayerGameboard().placeShipSpecific(1, [8, 8], "x")
+    player.getPlayerGameboard().placeShipRandom(4)
+    player.getPlayerGameboard().placeShipRandom(3)
+    player.getPlayerGameboard().placeShipRandom(3)
+    player.getPlayerGameboard().placeShipRandom(2)
+    player.getPlayerGameboard().placeShipRandom(2)
+    player.getPlayerGameboard().placeShipRandom(2)
+    player.getPlayerGameboard().placeShipRandom(1)
+    player.getPlayerGameboard().placeShipRandom(1)
+    player.getPlayerGameboard().placeShipRandom(1)
+    player.getPlayerGameboard().placeShipRandom(1)
+   
 
-    drawPlayerGrid(player)
 }
+
+
+
+
+
 function drawPlayerGrid(player) {
     const grid = document.createElement("div")
 
@@ -67,9 +73,16 @@ function resetBoards() {
     currentPlayer = currentPlayer === realPlayer ? computerPlayer : realPlayer
     turnHelper.value = `${currentPlayer.getPlayerType()}'s turn ` 
     grids.innerHTML = ""
-    preDeterminedBoard(realPlayer)
-    preDeterminedBoard(computerPlayer)
+
+    drawPlayerGrid(realPlayer)
+    drawPlayerGrid(computerPlayer)
+   
 }
+
+placeShipBtn.addEventListener("click", ()=> {
+    preDeterminedBoard(realPlayer)
+preDeterminedBoard(computerPlayer)
+})
 
 grids.addEventListener("click", (e) => {
     let targetCoordinate = e.target.getAttribute("data-coordinates")
@@ -82,7 +95,7 @@ grids.addEventListener("click", (e) => {
             currentPlayer === realPlayer ? computerPlayer : realPlayer
 
         targetPlayer.getPlayerGameboard().receiveAttack(targetCoordinate)
-        console.log(targetPlayer.getPlayerGameboard().checkIfAllIsSunk())
+        //console.log(targetPlayer.getPlayerGameboard().checkIfAllIsSunk())
         if(targetPlayer.getPlayerGameboard().checkIfAllIsSunk()){
             drawGameOver("win", "Game Over! You win!")
         }

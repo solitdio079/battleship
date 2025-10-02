@@ -1,5 +1,6 @@
-function createShip(length,hitCount=0, sunk=false){
-   
+function createShip(length,sunk=false){
+    let hitCount = 0
+    
     function hit(){
         return ++hitCount
     }
